@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'php/db.php';
 $stmt = $conn->query("SELECT * FROM tickets");
 $tickets = $stmt->fetchAll();
@@ -10,11 +11,62 @@ $tickets = $stmt->fetchAll();
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/script.js"></script>
     <title>Concert Ticket Sales</title>
+    <style>
+    .profile-container {
+        float: right;
+        margin-right: 2em;
+        position: relative;
+        display: inline-block;
+    }
+    .profile-img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        vertical-align: middle;
+        border: 2px solid #fff;
+        background: #eee;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #fff;
+        min-width: 120px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .dropdown-content a {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+    .profile-container:hover .dropdown-content {
+        display: block;
+    }
+    </style>
 </head>
 <body>
     <div class="header">
         <h1>Concert Ticket Sales</h1>
-        <a href="login.php" class="admin-link">Login</a>
+        <?php if (isset($_SESSION['username'])): ?>
+            <div class="profile-container">
+                <img src="images/images.jpg" alt="Profile" class="profile-img">
+                <div class="dropdown-content">
+                    <span style="padding: 12px 16px; display: block; color: #888; font-size: 14px;">Hello, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
+                    <a href="php/logout.php">Logout</a>
+                </div>
+            </div>
+        <?php else: ?>
+            <a href="login.php" class="admin-link">Login</a>
+        <?php endif; ?>
     </div>
     <div class="container">
         <h2>Available Tickets</h2>
