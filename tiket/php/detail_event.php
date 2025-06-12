@@ -22,7 +22,7 @@ $ticket_types = json_decode($event['ticket_types'], true);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <title>Detail: <?= htmlspecialchars($event['event_name']) ?></title>
 </head>
 <body>
@@ -32,14 +32,14 @@ $ticket_types = json_decode($event['ticket_types'], true);
             <a href="../index.php">Home</a>
             <?php if (isset($_SESSION['username'])): ?>
                 <div class="profile-container">
-                    <img src="images/images.jpg" alt="Profile" class="profile-img">
+                    <img src="../images/images.jpg" alt="Profile" class="profile-img">
                     <div class="dropdown-content">
                         <span class="dropdown-greeting">Hello, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
                         <a href="logout.php">Logout</a>
                     </div>
                 </div>
             <?php else: ?>
-                <a href="login.php">Login</a>
+                <a href="../login.php">Login</a>
             <?php endif; ?>
         </nav>
     </header>
@@ -48,9 +48,10 @@ $ticket_types = json_decode($event['ticket_types'], true);
         <div class="event-detail-container">
             <div class="event-image-container">
                 <?php if (!empty($event['image'])): ?>
-                    <img src="images/<?= htmlspecialchars($event['image']) ?>" alt="<?= htmlspecialchars($event['event_name']) ?>">
+                    <img src="../images/<?= htmlspecialchars($event['image']) ?>" alt="<?= htmlspecialchars($event['event_name']) ?>">
                 <?php else: ?>
-                    <img src="images/placeholder.png" alt="No image available"> <?php endif; ?>
+                    <img src="../images/placeholder.png" alt="No image available"> 
+                <?php endif; ?>
             </div>
 
             <div class="event-info-container">
@@ -68,7 +69,7 @@ $ticket_types = json_decode($event['ticket_types'], true);
 
                 <div class="ticket-purchase-section">
                     <h2 class="section-title">Beli Tiket</h2>
-                    <form action="purchase.php" method="POST">
+                     <form action="../purchase.php" method="POST">
                         <input type="hidden" name="event_id" value="<?= $event['id'] ?>">
 
                         <label for="ticket_type">Pilih Jenis Tiket:</label>
