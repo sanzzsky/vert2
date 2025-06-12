@@ -17,7 +17,8 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <header class="header">
         <h1>Concert Ticket Sales</h1>
-        <nav>
+        <nav class="main-nav">
+            <a href="index.php">Home</a>
             <?php if (isset($_SESSION['username'])): ?>
                 <div class="profile-container">
                     <img src="images/images.jpg" alt="Profile" class="profile-img">
@@ -27,7 +28,7 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 </div>
             <?php else: ?>
-                <a href="login.php" class="login-link">Login</a>
+                <a href="login.php">Login</a>
             <?php endif; ?>
         </nav>
     </header>
@@ -41,16 +42,18 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <img src="images/<?= htmlspecialchars($ticket['image']) ?>" alt="<?= htmlspecialchars($ticket['event_name']) ?>" class="ticket-image">
                     <?php endif; ?>
                     
-                    <h3><?= htmlspecialchars($ticket['event_name']) ?></h3>
-                    
-                    <p class="event-time">
-                        🗓️ <?= date('d F Y', strtotime($ticket['event_date'])) ?>
-                        <?php if (!empty($ticket['event_time'])): ?>
-                            | ⏰ <?= date('H:i', strtotime($ticket['event_time'])) ?> WIB
-                        <?php endif; ?>
-                    </p>
-                    
-                    <a href="php/detail_event.php?id=<?= $ticket['id'] ?>" class="detail-button">View Details</a>
+                    <div class="ticket-info">
+                        <h3><?= htmlspecialchars($ticket['event_name']) ?></h3>
+                        
+                        <p class="event-time">
+                            🗓️ <?= date('d F Y', strtotime($ticket['event_date'])) ?>
+                            <?php if (!empty($ticket['event_time'])): ?>
+                                <br>⏰ <?= date('H:i', strtotime($ticket['event_time'])) ?> WIB
+                            <?php endif; ?>
+                        </p>
+                        
+                        <a href="php/detail_event.php?id=<?= $ticket['id'] ?>" class="detail-button">View Details</a>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
