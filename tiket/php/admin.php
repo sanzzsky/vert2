@@ -18,7 +18,7 @@ $tickets = $conn->query("SELECT * FROM tickets")->fetchAll();
 <body>
     <div class="container">
         <h1>Welcome, Admin</h1>
-        <a href="php/logout.php">Logout</a>
+        <a href="logout.php">Logout</a>
         <h2>Add New Ticket</h2>
         <form action="add_ticket.php" method="post" enctype="multipart/form-data">
             <label>Event Name: <input type="text" name="event_name" required></label><br>
