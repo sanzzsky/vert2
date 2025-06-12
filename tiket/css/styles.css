@@ -1,29 +1,52 @@
 /* General Body Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     background-color: #f4f4f4;
     margin: 0;
     color: #333;
+    line-height: 1.6;
 }
 
 /* Header and Footer */
 .header, .footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #ffffff;
+    color: #333;
     padding: 1em 2em;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .header h1 {
     margin: 0;
-    font-size: 1.8em;
+    font-size: 1.5em;
 }
 
 .footer {
     text-align: center;
     margin-top: 2em;
+    padding: 2em;
+    background-color: #333;
+    color: #fff;
+}
+
+/* Main Navigation */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.main-nav a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+}
+.main-nav a:hover {
+    background-color: #f0f0f0;
 }
 
 /* Main Content Container */
@@ -31,81 +54,16 @@ body {
     width: 90%;
     max-width: 1200px;
     margin: 2em auto;
-    overflow: hidden;
     background: #fff;
     padding: 2em;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.container h2 {
+.container h2, .section-title {
     text-align: center;
-    margin-bottom: 1.5em;
-}
-
-/* Ticket Grid Layout */
-.ticket-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.ticket {
-    border: 1px solid #ddd;
-    background: white;
-    padding: 20px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.ticket-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    margin-bottom: 15px;
-}
-
-.ticket h3 {
-    margin: 0.5em 0;
-}
-
-.ticket p {
-    margin: 0.5em 0;
-}
-
-.ticket button {
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 1em;
-    transition: background-color 0.3s;
-}
-
-.ticket button:hover {
-    background-color: #4cae4c;
-}
-
-/* Login Link */
-.login-link {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1em;
-    padding: 8px 16px;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.login-link:hover {
-    background-color: #fff;
-    color: #333;
+    margin-bottom: 1em;
+    font-weight: 600;
 }
 
 /* Profile Dropdown Styles */
@@ -113,129 +71,117 @@ body {
     position: relative;
     display: inline-block;
 }
-
 .profile-img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
     vertical-align: middle;
-    border: 2px solid #fff;
 }
-
 .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #fff;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 100;
-    border-radius: 6px;
-    overflow: hidden;
+    display: none; position: absolute; right: 0; background-color: #fff;
+    min-width: 180px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 100; border-radius: 6px; overflow: hidden;
+    border: 1px solid #e5e5e5;
 }
-
 .dropdown-greeting {
-    padding: 12px 16px;
-    display: block;
-    color: #888;
-    font-size: 14px;
+    padding: 12px 16px; display: block; color: #555; font-size: 14px;
     border-bottom: 1px solid #f1f1f1;
 }
-
 .dropdown-content a {
-    color: #333;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
+    color: #333; padding: 12px 16px; text-decoration: none; display: block; text-align: left;
 }
-
 .dropdown-content a:hover {
     background-color: #f1f1f1;
 }
-
 .profile-container:hover .dropdown-content {
     display: block;
 }
 
-/* Modal Styles */
-.modal {
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+/* --- Styles for Detail Page --- */
 
-.modal-content {
-    background: #fff;
-    padding: 2em;
+.event-detail-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.event-image-container {
+    flex: 1;
+    min-width: 300px;
+}
+.event-image-container img {
+    width: 100%;
+    height: auto;
     border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 1px solid #eee;
+}
+.event-info-container {
+    flex: 2;
+    min-width: 300px;
+}
+.event-title {
+    margin-top: 0;
+    font-size: 2.2em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.event-meta {
+    margin: 20px 0;
+    padding: 20px;
+    list-style: none;
+    background-color: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+}
+.event-meta li {
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+.event-meta li:last-child {
+    margin-bottom: 0;
+}
+.event-description {
+    color: #555;
 }
 
-.modal-content form label {
+.ticket-purchase-section {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    padding: 25px;
+    margin-top: 30px;
+    border-radius: 8px;
+}
+.ticket-purchase-section .section-title {
+    margin-top: 0;
+    text-align: left;
+}
+.ticket-purchase-section label {
+    font-weight: 600;
     display: block;
-    margin-bottom: 0.5em;
-    font-weight: bold;
+    margin-bottom: 8px;
+    margin-top: 15px;
 }
-
-.modal-content form input {
+.ticket-purchase-section select, .ticket-purchase-section input {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.form-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 1em;
-}
-
-.form-buttons button {
-    padding: 10px 20px;
+    padding: 12px;
     border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-.form-buttons button[type="submit"] {
-    background-color: #5cb85c;
-    color: white;
-}
-
-.form-buttons button[type="button"] {
-    background-color: #f4f4f4;
     border: 1px solid #ccc;
+    font-size: 1em;
 }
-
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
+.purchase-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2em;
     font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.2s;
 }
-
-.close-button:hover,
-.close-button:focus {
-    color: black;
-    text-decoration: none;
+.purchase-button:hover {
+    background-color: #218838;
 }

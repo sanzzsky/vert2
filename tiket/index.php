@@ -1,8 +1,10 @@
 <?php
 session_start();
 require 'php/db.php';
-$stmt = $conn->query("SELECT * FROM tickets");
-$tickets = $stmt->fetchAll();
+
+// Ambil hanya event yang statusnya 'active' untuk ditampilkan di home
+$stmt = $conn->query("SELECT * FROM tickets WHERE status = 'active' ORDER BY event_date ASC");
+$tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,37 +33,28 @@ $tickets = $stmt->fetchAll();
     </header>
 
     <main class="container">
-        <h2>Available Tickets</h2>
+        <h2>Available Events</h2>
         <div class="ticket-grid">
             <?php foreach($tickets as $ticket): ?>
                 <div class="ticket">
-                    <img src="images/<?= htmlspecialchars($ticket['image']) ?>" alt="<?= htmlspecialchars($ticket['event_name']) ?>" class="ticket-image">
+                    <?php if (!empty($ticket['image'])): ?>
+                        <img src="images/<?= htmlspecialchars($ticket['image']) ?>" alt="<?= htmlspecialchars($ticket['event_name']) ?>" class="ticket-image">
+                    <?php endif; ?>
+                    
                     <h3><?= htmlspecialchars($ticket['event_name']) ?></h3>
-                    <p>Date: <?= htmlspecialchars($ticket['date']) ?></p>
-                    <p>Price: Rp <?= number_format($ticket['price'], 0, ',', '.') ?></p>
-                    <button onclick="showPurchaseForm(<?= $ticket['id'] ?>)">Buy Ticket</button>
+                    
+                    <p class="event-time">
+                        🗓️ <?= date('d F Y', strtotime($ticket['event_date'])) ?>
+                        <?php if (!empty($ticket['event_time'])): ?>
+                            | ⏰ <?= date('H:i', strtotime($ticket['event_time'])) ?> WIB
+                        <?php endif; ?>
+                    </p>
+                    
+                    <a href="php/detail_event.php?id=<?= $ticket['id'] ?>" class="detail-button">View Details</a>
                 </div>
             <?php endforeach; ?>
         </div>
     </main>
-
-    <div id="purchaseModal" class="modal" style="display:none;">
-        <div class="modal-content">
-            <span class="close-button" onclick="closePurchaseForm()">&times;</span>
-            <h3>Confirm Your Purchase</h3>
-            <form id="purchaseForm" method="post" action="php/purchase.php">
-                <input type="hidden" name="ticket_id" id="modal_ticket_id">
-                <label for="buyer_name">Name:</label>
-                <input type="text" id="buyer_name" name="buyer_name" required>
-                <label for="buyer_email">Email:</label>
-                <input type="email" id="buyer_email" name="buyer_email" required>
-                <div class="form-buttons">
-                    <button type="submit">Confirm Purchase</button>
-                    <button type="button" onclick="closePurchaseForm()">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <footer class="footer">
         <p>&copy; <?= date("Y") ?> Concert Ticket Sales</p>
