@@ -69,7 +69,7 @@ $ticket_types = json_decode($event['ticket_types'], true);
 
                 <div class="ticket-purchase-section">
                     <h2 class="section-title">Beli Tiket</h2>
-                     <form action="../purchase.php" method="POST">
+                     <form action="../php/purchase.php" method="POST">
                         <input type="hidden" name="event_id" value="<?= $event['id'] ?>">
 
                         <label for="ticket_type">Pilih Jenis Tiket:</label>
