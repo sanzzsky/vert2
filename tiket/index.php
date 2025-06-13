@@ -53,6 +53,7 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <p class="text-sm text-gray-600">Temukan Event menarik</p>
         </div>
         <nav class="flex items-center gap-6">
+            <a href="index.php" class="text-pink-500 font-semibold">HOME</a>
             <?php if (isset($_SESSION['username'])): ?>
                 <div class="profile-dropdown relative">
                     <img src="images/images.jpg" alt="Profile" class="w-8 h-8 rounded-full cursor-pointer object-cover">
