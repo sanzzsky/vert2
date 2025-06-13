@@ -36,7 +36,7 @@ $ticket_types = json_decode($event['ticket_types'], true);
         .dropdown-content a:hover { background-color: #f1f1f1; }
     </style>
 </head>
-<body class="bg-gradient-to-br from-purple-100 to-violet-200 font-sans text-gray-800 flex flex-col min-h-screen">
+<body class="bg-gradient-to-br from-indigo-400 via-violet-200 to-white font-sans text-gray-800 flex flex-col min-h-screen">
 
     <header class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

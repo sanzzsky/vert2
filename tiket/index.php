@@ -27,8 +27,8 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concert Ticket Sales</title>
-    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="output.css">
     
     <style>
         .profile-dropdown .dropdown-content { display: none; position: absolute; right: 0; background-color: white; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 10; border-radius: 0.5rem; overflow: hidden; margin-top: 0.5rem; }
@@ -37,12 +37,12 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .dropdown-content a:hover { background-color: #f1f1f1; }
     </style>
 </head>
-<body class="bg-gradient-to-br from-purple-100 to-violet-200 font-sans text-gray-800 flex flex-col min-h-screen">
+<body class="bg-gradient-to-br from-indigo-400 via-violet-200 to-white font-sans text-gray-800 flex flex-col min-h-screen">
 
     <header class="flex justify-between items-center px-8 py-6">
         <div>
-            <h1 class="text-2xl font-bold text-violet-800">Concert Ticket Sales</h1>
-            <p class="text-sm text-gray-600">Temukan Event menarik</p>
+            <h2 class="text-2xl font-bold text-black">Concert Ticket Sales</h2>
+            <p class="text-sm text-black">Temukan Event menarik</p>
         </div>
         <nav class="flex items-center gap-6">
             <?php if (isset($_SESSION['username'])): ?>
@@ -59,7 +59,7 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </header>
 
-    <div class="flex justify-center px-4 mb-6">
+    <div class="flex justify-center px-4 mb-6 pt-5">
         <form action="" method="GET" class="w-full sm:w-2/3 lg:w-1/2">
             <div class="relative">
                 <input type="text" name="search" placeholder="Cari berdasarkan nama atau kategori event..."
