@@ -1,0 +1,159 @@
+/* General Body Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #f4f4f4;
+    margin: 0;
+    color: #333;
+    line-height: 1.6;
+    /* DIUBAH: Diberi padding atas seukuran tinggi header agar konten tidak tertutup */
+    padding-top: 80px; 
+}
+
+/* --- STICKY HEADER --- */
+.header {
+    background-color: #ffffff;
+    color: #333;
+    padding: 1em 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e5e5;
+    
+    /* DIUBAH: Properti untuk membuat header sticky */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box; /* Mencegah padding menambah lebar */
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 2em;
+    padding: 2em;
+    background-color: #333;
+    color: #fff;
+}
+
+/* Main Navigation */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.main-nav a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+}
+.main-nav a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Main Content Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 2em auto;
+    background: #fff;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.container h2, .section-title {
+    text-align: center;
+    margin-bottom: 1em;
+    font-weight: 600;
+}
+
+/* --- GAMBAR DI HALAMAN INDEX --- */
+.ticket-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+.ticket {
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Penting untuk menjaga gambar tetap di dalam kotak */
+}
+.ticket-image {
+    width: 100%;
+    /* DIUBAH: Beri tinggi yang tetap agar semua kartu sama tinggi */
+    height: 180px; 
+    /* DIUBAH: Kunci utama agar gambar menyesuaikan tanpa distorsi */
+    object-fit: cover; 
+}
+.ticket-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center;
+}
+.ticket-info h3 { margin: 0.5em 0; }
+.ticket-info p { margin: 0.5em 0; flex-grow: 1; }
+
+/* Profile Dropdown Styles (Tidak diubah) */
+.profile-container { position: relative; display: inline-block; }
+.profile-img { width: 40px; height: 40px; border-radius: 50%; cursor: pointer; vertical-align: middle; }
+.dropdown-content { display: none; position: absolute; right: 0; background-color: #fff; min-width: 180px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1); z-index: 100; border-radius: 6px; overflow: hidden; border: 1px solid #e5e5e5; }
+.dropdown-greeting { padding: 12px 16px; display: block; color: #555; font-size: 14px; border-bottom: 1px solid #f1f1f1; }
+.dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; text-align: left; }
+.dropdown-content a:hover { background-color: #f1f1f1; }
+.profile-container:hover .dropdown-content { display: block; }
+
+
+/* --- STYLES FOR DETAIL PAGE --- */
+
+.event-detail-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.event-image-container {
+    /* DIUBAH: Beri basis 45% agar lebih besar, mendekati setengah halaman */
+    flex: 1 1 45%; 
+    min-width: 300px;
+}
+.event-image-container img {
+    width: 100%;
+    height: auto;
+    max-height: 500px; /* Batas tinggi maksimal */
+    object-fit: cover; /* Pastikan gambar tetap proporsional */
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+.event-info-container {
+    /* DIUBAH: Beri basis 50% */
+    flex: 2 1 50%; 
+    min-width: 300px;
+}
+.event-title { margin-top: 0; font-size: 2.2em; font-weight: 700; margin-bottom: 20px; }
+.event-meta { margin: 20px 0; padding: 20px; list-style: none; background-color: #fafafa; border-radius: 8px; border: 1px solid #f0f0f0; }
+.event-meta li { margin-bottom: 12px; font-size: 1.1em; }
+.event-meta li:last-child { margin-bottom: 0; }
+.event-description { color: #555; }
+.ticket-purchase-section { background-color: #ffffff; border: 1px solid #e5e5e5; padding: 25px; margin-top: 30px; border-radius: 8px; }
+.ticket-purchase-section .section-title { margin-top: 0; text-align: left; }
+.ticket-purchase-section label { font-weight: 600; display: block; margin-bottom: 8px; margin-top: 15px; }
+.ticket-purchase-section select, .ticket-purchase-section input { width: 100%; padding: 12px; border-radius: 5px; border: 1px solid #ccc; font-size: 1em; }
+.purchase-button { width: 100%; padding: 15px; font-size: 1.2em; font-weight: bold; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; text-align: center; margin-top: 20px; transition: background-color 0.2s; }
+.purchase-button:hover { background-color: #218838; }
+.detail-button { background-color: #0275d8; color: white; text-decoration: none; padding: 10px 15px; border-radius: 5px; margin-top: 1em; display: inline-block; transition: background-color 0.3s; }
+.detail-button:hover { background-color: #025aa5; }
