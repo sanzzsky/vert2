@@ -42,7 +42,7 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <header class="flex justify-between items-center px-8 py-6">
         <div>
-            <h2 class="text-2xl font-bold text-black">Concert Ticket Sales</h2>
+            <h1 class="text-2xl font-bold text-black">TIKETFEST.ID</h1>
             <p class="text-sm text-black">Temukan Event menarik</p>
         </div>
         <nav class="flex items-center gap-6">

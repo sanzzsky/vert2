@@ -88,7 +88,7 @@ function formatRupiah($number) {
                     <div class="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
                         <i class="fas fa-ticket-alt text-white text-lg"></i>
                     </div>
-                    <h1 class="text-2xl font-bold text-gray-800">TicketPro</h1>
+                    <h1 class="text-2xl font-bold text-gray-800">TICKETFEST.ID</h1>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="hidden md:flex items-center space-x-2 text-gray-600">
