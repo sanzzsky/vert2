@@ -38,39 +38,43 @@ $ticket_types = json_decode($event['ticket_types'], true);
 </head>
 <body class="bg-gradient-to-br from-indigo-400 via-violet-200 to-white font-sans text-gray-800 flex flex-col min-h-screen">
 
-    <header class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center space-x-4">
-                    <nav class="flex space-x-6">
-                        <a href="../index.php" class="text-violet-600 font-medium hover:text-violet-700">Beranda</a>
-                    </nav>
-                </div>
-                <nav class="flex items-center gap-6">
-                    <?php if (isset($_SESSION['username'])): ?>
-                        <div class="relative" x-data="{ open: false }">
-                            <img 
-                                src="../images/images.jpg" 
-                                alt="Profile" 
-                                class="w-8 h-8 rounded-full cursor-pointer object-cover" 
-                                @click="open = !open"
-                            >
-                            <div 
-                                x-show="open" 
-                                @click.away="open = false"
-                                class="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 z-50"
-                            >
-                                <span class="block px-4 py-2 text-sm text-gray-700">Hello, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
-                                <a href="logout.php" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
-                            </div>
-                        </div>
-                    <?php else: ?>
-                        <a href="../login.php" class="bg-violet-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-violet-700">LOGIN</a>
-                    <?php endif; ?>
+<header class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto px-0">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center space-x-6">
+                <h1 class="text-xl font-bold text-violet-700 pl-4">TIKETFEST.ID</h1>
+                <nav class="flex space-x-6">
+                    <a href="../index.php" class="text-violet-600 font-medium hover:text-violet-700">Beranda</a>
                 </nav>
             </div>
+            
+            <!-- KANAN -->
+            <nav class="flex items-center gap-6">
+                <?php if (isset($_SESSION['username'])): ?>
+                    <div class="relative" x-data="{ open: false }">
+                        <img 
+                            src="../images/images.jpg" 
+                            alt="Profile" 
+                            class="w-8 h-8 rounded-full cursor-pointer object-cover" 
+                            @click="open = !open"
+                        >
+                        <div 
+                            x-show="open" 
+                            @click.away="open = false"
+                            class="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 z-50"
+                        >
+                            <span class="block px-4 py-2 text-sm text-gray-700">Hello, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
+                            <a href="logout.php" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <a href="../login.php" class="bg-violet-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-violet-700">LOGIN</a>
+                <?php endif; ?>
+            </nav>
         </div>
-    </header>
+    </div>
+</header>
+
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">

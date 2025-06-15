@@ -7,11 +7,49 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 require_once 'db.php';
 
 // ===================================================================
-// BAGIAN 1: CONTROLLER - Memproses semua Aksi (Add & Update)
+// BAGIAN 1: CONTROLLER - Memproses semua Aksi (Add, Update & Delete)
 // ===================================================================
 
 // Cek jika ada request POST (dari submit form)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    // --- Logika untuk DELETE Event ---
+    if (isset($_POST['delete_ticket'])) {
+        $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+        
+        if ($id) {
+            // Ambil data event terlebih dahulu untuk mendapatkan nama gambar
+            $sql_select = "SELECT image FROM tickets WHERE id = :id";
+            $stmt_select = $conn->prepare($sql_select);
+            $stmt_select->execute([':id' => $id]);
+            $event = $stmt_select->fetch(PDO::FETCH_ASSOC);
+            
+            if ($event) {
+                // Hapus file gambar jika ada
+                if (!empty($event['image'])) {
+                    $target_dir = "../images/";
+                    $image_path = $target_dir . $event['image'];
+                    if (file_exists($image_path)) {
+                        unlink($image_path);
+                    }
+                }
+                
+                // Hapus record dari database
+                $sql_delete = "DELETE FROM tickets WHERE id = :id";
+                $stmt_delete = $conn->prepare($sql_delete);
+                $stmt_delete->execute([':id' => $id]);
+                
+                header("Location: admin.php?status=delete_success");
+                exit();
+            } else {
+                header("Location: admin.php?status=delete_error&msg=Event tidak ditemukan");
+                exit();
+            }
+        } else {
+            header("Location: admin.php?status=delete_error&msg=ID tidak valid");
+            exit();
+        }
+    }
     
     // --- Logika untuk UPDATE Event ---
     if (isset($_POST['update_ticket'])) {
@@ -225,14 +263,14 @@ $all_tickets = $conn->query("SELECT * FROM tickets ORDER BY event_date DESC")->f
         <nav class="mt-8 px-4 space-y-2">
             <div class="text-indigo-200 text-xs uppercase tracking-wider font-semibold mb-4 px-3">NAVIGATION</div>
             
-            <a href="#" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover-lift">
-                <i class="fas fa-chart-pie w-5 h-5 mr-3 group-hover:scale-110 transition-transform"></i>
-                <span>Dashboard</span>
-            </a>
-            
             <a href="#" class="flex items-center px-4 py-3 bg-white/20 text-white rounded-xl shadow-lg">
                 <i class="fas fa-calendar-alt w-5 h-5 mr-3"></i>
                 <span>Event Management</span>
+            </a>
+
+            <a href="tabel_event.php" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover-lift">
+                <i class="fas fa-chart-pie w-5 h-5 mr-3 group-hover:scale-110 transition-transform"></i>
+                <span>Tabel event</span>
             </a>
             
             <a href="#" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover-lift">
@@ -275,17 +313,12 @@ $all_tickets = $conn->query("SELECT * FROM tickets ORDER BY event_date DESC")->f
                     </div>
                     
                     <div class="flex items-center space-x-4">
-                        <div class="relative">
-                            <button class="p-2 text-gray-500 hover:text-gray-700 relative">
-                                <!-- notifications icons  -->
-                                <i class="fas fa-bell text-lg"></i>
-                                <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"></span>
-                            </button>
-                        </div>
                         <div class="text-right">
                             <div class="text-sm font-medium text-gray-900">Administrator</div>
                             <div class="text-xs text-gray-500">admin@tiketfest.id</div>
                         </div>
+
+                        <!-- ini profile -->
                         <div class="w-10 h-10 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center shadow-lg">
                             <span class="text-white font-medium text-sm">A</span>
                         </div>
@@ -581,32 +614,11 @@ $all_tickets = $conn->query("SELECT * FROM tickets ORDER BY event_date DESC")->f
             </div>
         </div>
     </div>
-
-    <!-- Quick Actions -->
-    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-200/50 p-6 hover-lift transition-all duration-300">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-            <i class="fas fa-bolt text-yellow-500 mr-2"></i>
-            Quick Actions
-        </h3>
-        
-        <div class="space-y-3">
-            <button type="button" class="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-primary to-purple-600 hover:from-primary-dark hover:to-purple-700 text-white rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                <i class="fas fa-plus mr-2"></i>
-                Event Baru
-            </button>
-            
-            <button type="button" class="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                <i class="fas fa-file-export mr-2"></i>
-                Export Data
-            </button>
-            
-            <button type="button" class="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white rounded-xl font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-                <i class="fas fa-chart-line mr-2"></i>
-                Lihat Laporan
-            </button>
-        </div>
-    </div>
 </div>
+
+<!-- TABEL ADMINN -->
+
+
 
 <!-- JavaScript untuk Upload Poster -->
 <script>

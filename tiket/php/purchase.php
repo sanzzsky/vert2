@@ -375,7 +375,7 @@ function formatRupiah($number) {
                         <div class="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center">
                             <i class="fas fa-ticket-alt text-white"></i>
                         </div>
-                        <h3 class="text-xl font-bold">TicketPro</h3>
+                        <h3 class="text-xl font-bold">TICKETFEST.ID</h3>
                     </div>
                     <p class="text-gray-400">Platform tiket online terpercaya untuk berbagai event menarik.</p>
                 </div>
@@ -396,7 +396,7 @@ function formatRupiah($number) {
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 TicketPro. All rights reserved.</p>
+                <p>&copy; 2025 TICKETFEST.ID . All rights reserved.</p>
             </div>
         </div>
     </footer>
