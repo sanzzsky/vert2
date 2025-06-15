@@ -323,10 +323,6 @@ function formatRupiah($number) {
                                 <input type="tel" id="buyer_phone" name="buyer_phone" required
                                     placeholder="08123456789"
                                     class="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/20 transition-all duration-200 text-gray-800 placeholder-gray-400">
-                                <p class="text-sm text-gray-500 flex items-center mt-1">
-                                    <i class="fas fa-info-circle mr-1"></i>
-                                    Notifikasi pemesanan akan dikirim via WhatsApp
-                                </p>
                             </div>
 
                             <!-- Terms & Conditions -->
