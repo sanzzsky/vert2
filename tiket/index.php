@@ -26,10 +26,8 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Concert Ticket Sales</title>
+    <title>TIKETFEST.ID</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/src/output.css">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     
     <style>
         .profile-dropdown .dropdown-content { display: none; position: absolute; right: 0; background-color: white; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 10; border-radius: 0.5rem; overflow: hidden; margin-top: 0.5rem; }
@@ -47,24 +45,23 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <nav class="flex items-center gap-6">
             <?php if (isset($_SESSION['username'])): ?>
-                <div class="relative" x-data="{ open: false }">
+                <div class="profile-dropdown relative">
                     <img 
                         src="images/images.jpg" 
                         alt="Profile" 
-                        class="w-8 h-8 rounded-full cursor-pointer object-cover" 
-                        @click="open = !open"
+                        class="w-8 h-8 rounded-full cursor-pointer object-cover"
                     >
-                    <div 
-                        x-show="open" 
-                        @click.away="open = false"
-                        class="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 z-50"
-                    >
+                    <div class="dropdown-content">
                         <span class="block px-4 py-2 text-sm text-gray-700">Hello, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
                         <a href="php/logout.php" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
                     </div>
                 </div>
             <?php else: ?>
-                <a href="login.php" class="bg-violet-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-violet-700">LOGIN</a>
+                <a href="login.php" title="Login" class="text-gray-600 hover:text-violet-700">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </a>
             <?php endif; ?>
         </nav>
     </header>
@@ -84,15 +81,24 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="flex justify-center gap-4 mb-10">
         <?php
-          $kategori = [ '../images/music.avif',
-                        '../images/foodfest.jpg',
-                        '../images/sportfest.png',
-                        '../images/artfest.webp',
-                        '../images/cinemafest.avif',];
-          foreach ($kategori as $k) {
-            echo "<img src='icons/$k' alt='kategori' class='w-14 h-14 rounded-xl bg-white p-2 shadow-md cursor-pointer hover:shadow-lg transition' />";
-          }
+          // Array diubah menjadi lebih terstruktur untuk menyimpan nama & gambar
+          $categories = [
+              ['name' => 'music', 'image' => 'images/music.avif'],
+              ['name' => 'food',  'image' => 'images/foodfest.jpg'],
+              ['name' => 'sport', 'image' => 'images/sportfest.png'],
+              ['name' => 'art',   'image' => 'images/artfest.webp'],
+              ['name' => 'cinema','image' => 'images/cinemafest.avif']
+          ];
+
+          foreach ($categories as $category):
+            // Setiap gambar dibungkus dengan link <a> yang melakukan pencarian
         ?>
+            <a href="index.php?search=<?= urlencode($category['name']) ?>" title="<?= ucfirst($category['name']) ?>">
+                <img src="<?= htmlspecialchars($category['image']) ?>" 
+                     alt="<?= htmlspecialchars($category['name']) ?>" 
+                     class="w-14 h-14 rounded-xl bg-white p-2 shadow-md cursor-pointer hover:shadow-lg hover:scale-110 transition-transform" />
+            </a>
+        <?php endforeach; ?>
     </div>
 
     <main class="px-4 sm:px-6 md:px-12 flex-grow w-full">
@@ -148,7 +154,7 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     <footer class="bg-violet-900 text-gray-200 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; <?= date("Y") ?> Concert Ticket Sales. All rights reserved.</p>
+            <p>&copy; <?= date("Y") ?> TIKETFEST.ID. All rights reserved.</p>
         </div>
     </footer>
     

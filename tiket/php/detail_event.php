@@ -25,7 +25,6 @@ $ticket_types = json_decode($event['ticket_types'], true);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail: <?= htmlspecialchars($event['event_name']) ?></title>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
@@ -39,44 +38,43 @@ $ticket_types = json_decode($event['ticket_types'], true);
 <body class="bg-gradient-to-br from-indigo-400 via-violet-200 to-white font-sans text-gray-800 flex flex-col min-h-screen">
 
 <header class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-10">
-    <div class="max-w-7xl mx-auto px-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-4">
-            <div class="flex items-center space-x-6">
-                <h1 class="text-xl font-bold text-violet-700 pl-4">TIKETFEST.ID</h1>
-                <nav class="flex space-x-6">
-                    <a href="../index.php" class="text-violet-600 font-medium hover:text-violet-700">Beranda</a>
-                </nav>
+            <div>
+                <h1 class="text-xl font-bold text-violet-700">TIKETFEST.ID</h1>
             </div>
             
-            <!-- KANAN -->
-            <nav class="flex items-center gap-6">
+            <nav class="flex items-center gap-5">
+                <a href="../index.php" title="Beranda" class="text-gray-600 hover:text-violet-700">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </a>
+                
                 <?php if (isset($_SESSION['username'])): ?>
-                    <div class="relative" x-data="{ open: false }">
+                    <div class="profile-dropdown relative">
                         <img 
                             src="../images/images.jpg" 
                             alt="Profile" 
-                            class="w-8 h-8 rounded-full cursor-pointer object-cover" 
-                            @click="open = !open"
+                            class="w-8 h-8 rounded-full cursor-pointer object-cover"
                         >
-                        <div 
-                            x-show="open" 
-                            @click.away="open = false"
-                            class="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 z-50"
-                        >
+                        <div class="dropdown-content">
                             <span class="block px-4 py-2 text-sm text-gray-700">Hello, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
                             <a href="logout.php" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
                         </div>
                     </div>
                 <?php else: ?>
-                    <a href="../login.php" class="bg-violet-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-violet-700">LOGIN</a>
+                    <a href="../login.php" title="Login" class="text-gray-600 hover:text-violet-700">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </a>
                 <?php endif; ?>
             </nav>
         </div>
     </div>
 </header>
-
-
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
             
             <div class="lg:col-span-2">
@@ -153,7 +151,7 @@ $ticket_types = json_decode($event['ticket_types'], true);
 
     <footer class="bg-violet-900 text-gray-200 py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; <?= date("Y") ?> Concert Ticket Sales. All rights reserved.</p>
+            <p>&copy; <?= date("Y") ?> TIKETFEST.ID. All rights reserved.</p>
         </div>
     </footer>
     
