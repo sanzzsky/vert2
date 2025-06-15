@@ -84,7 +84,11 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="flex justify-center gap-4 mb-10">
         <?php
-          $kategori = ['music.png', 'culture.png', 'food.png', 'festival.png', 'cinema.png'];
+          $kategori = [ '../images/music.avif',
+                        '../images/foodfest.jpg',
+                        '../images/sportfest.png',
+                        '../images/artfest.webp',
+                        '../images/cinemafest.avif',];
           foreach ($kategori as $k) {
             echo "<img src='icons/$k' alt='kategori' class='w-14 h-14 rounded-xl bg-white p-2 shadow-md cursor-pointer hover:shadow-lg transition' />";
           }
