@@ -28,7 +28,8 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concert Ticket Sales</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="/src/output.css">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     
     <style>
         .profile-dropdown .dropdown-content { display: none; position: absolute; right: 0; background-color: white; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 10; border-radius: 0.5rem; overflow: hidden; margin-top: 0.5rem; }
@@ -46,11 +47,20 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <nav class="flex items-center gap-6">
             <?php if (isset($_SESSION['username'])): ?>
-                <div class="profile-dropdown relative">
-                    <img src="images/images.jpg" alt="Profile" class="w-8 h-8 rounded-full cursor-pointer object-cover">
-                    <div class="dropdown-content">
-                        <span class="px-4 py-2 text-sm text-gray-700">Hello, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
-                        <a href="php/logout.php" class="text-sm">Logout</a>
+                <div class="relative" x-data="{ open: false }">
+                    <img 
+                        src="images/images.jpg" 
+                        alt="Profile" 
+                        class="w-8 h-8 rounded-full cursor-pointer object-cover" 
+                        @click="open = !open"
+                    >
+                    <div 
+                        x-show="open" 
+                        @click.away="open = false"
+                        class="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg py-2 z-50"
+                    >
+                        <span class="block px-4 py-2 text-sm text-gray-700">Hello, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
+                        <a href="php/logout.php" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
                     </div>
                 </div>
             <?php else: ?>
