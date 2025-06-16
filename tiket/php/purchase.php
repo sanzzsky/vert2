@@ -281,7 +281,7 @@ function formatRupiah($number) {
     </div>
 
     <script>
-        let timeLeft = 1 * 5, timerInterval, formSubmitted = false;
+        let timeLeft = 15 * 60, timerInterval, formSubmitted = false;
         function updateTimer() {
             const minutes = Math.floor(timeLeft / 60), seconds = timeLeft % 60;
             document.getElementById("timer").textContent = `${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`;

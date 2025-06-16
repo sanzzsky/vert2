@@ -257,7 +257,7 @@ unset($_SESSION['flash_message'], $_SESSION['flash_type']);
 </body>
 </html>
 
-<!-- Script Modal -->
+<!-- Script deleteModal -->
 <script>
     function openDeleteModal(eventId) {
         document.getElementById('deleteModal').classList.remove('hidden');
