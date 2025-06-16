@@ -135,7 +135,7 @@ unset($_SESSION['flash_message'], $_SESSION['flash_type']);
                 <div class="w-12 h-12 bg-white rounded-full mx-auto mb-2 flex items-center justify-center">
                     <i class="fas fa-user-shield text-primary"></i>
                 </div>
-                <div class="text-white text-sm font-medium">Admin Panel</div>
+                <div class="text-white text-sm font-medium">Administrator</div>
                 <div class="text-indigo-200 text-xs">v2.0</div>
             </div>
         </div>

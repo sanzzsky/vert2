@@ -271,8 +271,17 @@ function formatRupiah($number) {
         </div>
     </footer>
 
+    <!-- POP UP WAKTU ISI DATA HABIS -->
+    <div id="timeoutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-xl p-6 w-full max-w-md shadow-lg text-center animate-scaleIn">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Waktu Habis</h2>
+            <p class="mb-6 text-gray-600">Sesi pembelian Anda telah berakhir.</p>
+            <button onclick="redirectToHome()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Kembali ke Beranda</button>
+        </div>
+    </div>
+
     <script>
-        let timeLeft = 15 * 60, timerInterval, formSubmitted = false;
+        let timeLeft = 1 * 5, timerInterval, formSubmitted = false;
         function updateTimer() {
             const minutes = Math.floor(timeLeft / 60), seconds = timeLeft % 60;
             document.getElementById("timer").textContent = `${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`;
@@ -283,10 +292,11 @@ function formatRupiah($number) {
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
                 if (!formSubmitted) {
-                    alert("Waktu habis! Sesi pembelian telah berakhir.");
-                    window.location.href = "index.php";
+                    document.getElementById('timeoutModal').classList.remove('hidden');
+                    // window.location.href = "../index.php";
                 }
-            }
+                
+            } 
             timeLeft--;
         }
         timerInterval = setInterval(updateTimer, 1e3); updateTimer();
@@ -296,6 +306,12 @@ function formatRupiah($number) {
             t.disabled = true;
             t.innerHTML = `<div class="flex items-center justify-center space-x-3"><i class="fas fa-spinner fa-spin text-lg"></i><span class="text-lg">Memproses...</span></div>`;
         });
+
+        // fungsi redirectToHome
+        function redirectToHome() {
+            window.location.href = "../index.php";
+        }
+
     </script>
 </body>
 </html>
