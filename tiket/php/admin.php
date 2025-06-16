@@ -102,6 +102,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // --- Logika untuk ADD Event ---
     if (isset($_POST['add_ticket'])) {
+        // Validasi field wajib
+        $required_fields = ['event_name', 'category', 'description', 'event_date', 'event_time', 'location'];
+        $missing = false;
+        foreach ($required_fields as $field) {
+            if (empty($_POST[$field])) {
+                $missing = true;
+                break;
+            }
+        }
+
+        // Validasi gambar wajib
+        $image_missing = !(isset($_FILES['image']) && $_FILES['image']['error'] == 0);
+
+        // Minimal satu jenis tiket
+        $ticket_types_array = [];
+        if (isset($_POST['types']) && is_array($_POST['types'])) {
+            foreach ($_POST['types'] as $type) {
+                if (!empty($type['type_name']) && !empty($type['price']) && !empty($type['quantity'])) {
+                    $ticket_types_array[] = [
+                        'type_name' => trim($type['type_name']),
+                        'price' => (float)$type['price'],
+                        'quantity' => (int)$type['quantity']
+                    ];
+                }
+            }
+        }
+        // Function error jika fields tidak lengkap
+        if ($missing || $image_missing || count($ticket_types_array) == 0) {
+            echo "
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap' rel='stylesheet'>
+                <style>
+                    .swal2-popup {
+                        font-family: 'Poppins', sans-serif;
+                    }
+                </style>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Data Tidak Lengkap',
+                            html: 'Harap mengisi semua field:<br><b>Nama, Kategori, Deskripsi, Tanggal, Waktu, Tempat, Gambar</b><br>dan minimal satu jenis tiket!',
+                            confirmButtonText: 'Kembali'
+                        }).then(() => {
+                            window.history.back();
+                        });
+                    });
+                </script>
+                ";
+
+            exit();
+        }
+
+        // Proses upload gambar
         $image_name = null;
         if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
             $target_dir = "../images/";
@@ -110,33 +164,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
         }
 
-        $ticket_types_array = [];
-        if (isset($_POST['types']) && is_array($_POST['types'])) {
-            foreach ($_POST['types'] as $type) {
-                if (!empty($type['type_name']) && !empty($type['price']) && !empty($type['quantity'])) {
-                    $ticket_types_array[] = ['type_name' => trim($type['type_name']), 'price' => (float)$type['price'], 'quantity' => (int)$type['quantity']];
-                }
-            }
-        }
         $ticket_types_json = json_encode($ticket_types_array);
 
         $sql = "INSERT INTO tickets (event_name, description, category, location, event_date, event_time, image, status, ticket_types, price) VALUES (:event_name, :description, :category, :location, :event_date, :event_time, :image, :status, :ticket_types, 0)";
         $stmt = $conn->prepare($sql);
         $stmt->execute([
-            ':event_name' => $_POST['event_name'], 
-            ':description' => $_POST['description'], 
-            ':category' => $_POST['category'], 
-            ':location' => $_POST['location'], 
-            ':event_date' => $_POST['event_date'], 
-            ':event_time' => !empty($_POST['event_time']) ? $_POST['event_time'] : null, 
-            ':image' => $image_name, 
-            ':status' => $_POST['status'], 
+            ':event_name' => $_POST['event_name'],
+            ':description' => $_POST['description'],
+            ':category' => $_POST['category'],
+            ':location' => $_POST['location'],
+            ':event_date' => $_POST['event_date'],
+            ':event_time' => !empty($_POST['event_time']) ? $_POST['event_time'] : null,
+            ':image' => $image_name,
+            ':status' => $_POST['status'],
             ':ticket_types' => $ticket_types_json
         ]);
-        
+
         header("Location: admin.php?status=add_success");
         exit();
     }
+
 }
 
 // ===================================================================
@@ -179,6 +226,7 @@ $all_tickets = $conn->query("SELECT * FROM tickets ORDER BY event_date DESC")->f
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - TIKETFEST.ID</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         tailwind.config = {
             theme: {
