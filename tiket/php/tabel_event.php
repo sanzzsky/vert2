@@ -219,7 +219,29 @@ unset($_SESSION['flash_message'], $_SESSION['flash_type']);
                                         <form method="POST" onsubmit="return confirm('Anda yakin ingin menghapus event ini?');" class="inline">
                                             <input type="hidden" name="action" value="delete">
                                             <input type="hidden" name="id" value="<?php echo $event['id']; ?>">
-                                            <button type="submit" class="text-red-500 hover:text-red-700 p-2" title="Hapus"><i class="fas fa-trash"></i></button>
+                                            <!-- Tombol Hapus -->
+                                            <button 
+                                                type="button" 
+                                                onclick="openDeleteModal(<?php echo $event['id']; ?>)" 
+                                                class="text-red-500 hover:text-red-700 p-2" 
+                                                title="Hapus">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+
+                                            <!-- Modal Konfirmasi -->
+                                            <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+                                                <div class="bg-white rounded-xl p-6 w-full max-w-md shadow-lg text-center">
+                                                    <h2 class="text-xl font-semibold mb-4 text-gray-800">Konfirmasi Penghapusan</h2>
+                                                    <p class="mb-6 text-gray-600">Apakah Anda yakin ingin menghapus event ini?</p>
+                                                    
+                                                    <form id="deleteForm" method="POST" class="flex justify-center gap-4">
+                                                        <input type="hidden" name="action" value="delete">
+                                                        <input type="hidden" name="id" id="deleteEventId">
+                                                        <button type="button" onclick="closeDeleteModal()" class="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400">Batal</button>
+                                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Hapus</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </td>
@@ -234,3 +256,15 @@ unset($_SESSION['flash_message'], $_SESSION['flash_type']);
     </div>
 </body>
 </html>
+
+<!-- Script Modal -->
+<script>
+    function openDeleteModal(eventId) {
+        document.getElementById('deleteModal').classList.remove('hidden');
+        document.getElementById('deleteEventId').value = eventId;
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+    }
+</script>
