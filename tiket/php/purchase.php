@@ -46,6 +46,7 @@ if (isset($_SESSION['user_id'])) {
     $user = $user_stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+
 // Hitung harga
 $price_per_ticket = $selected_ticket_details['price'];
 $subtotal = $price_per_ticket * $quantity;
