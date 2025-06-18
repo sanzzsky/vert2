@@ -298,44 +298,72 @@ $all_tickets = $conn->query("SELECT * FROM tickets ORDER BY event_date DESC")->f
 </head>
 <body class="bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100 font-inter min-h-screen">
     <!-- Sidebar -->
-    <div class="fixed inset-y-0 left-0 z-50 w-64 gradient-bg transform transition-transform duration-300 ease-in-out lg:translate-x-0">
-        <div class="flex items-center justify-center h-16 px-4 border-b border-indigo-500/20">
+    <button 
+        id="sidebarToggle" 
+        class="fixed top-4 left-4 z-50 lg:hidden bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+    >
+        <i class="fas fa-bars text-lg"></i>
+    </button>
+
+    <!-- Overlay -->
+    <div 
+        id="sidebarOverlay" 
+        class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden opacity-0 pointer-events-none transition-opacity duration-300"
+    ></div>
+
+    <!-- Sidebar -->
+    <div 
+        id="sidebar" 
+        class="fixed inset-y-0 left-0 z-50 w-64 gradient-bg transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0"
+    >
+        <!-- Header -->
+        <div class="flex items-center justify-between h-16 px-4 border-b border-indigo-500/20">
             <div class="flex items-center space-x-2">
                 <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
                     <i class="fas fa-ticket-alt text-primary text-sm"></i>
                 </div>
                 <h1 class="text-white text-xl font-bold">TIKETFEST.ID</h1>
             </div>
+            
+            <!-- Close Button (Mobile) -->
+            <button 
+                id="sidebarClose" 
+                class="lg:hidden text-white hover:text-gray-300 transition-colors duration-200"
+            >
+                <i class="fas fa-times text-xl"></i>
+            </button>
         </div>
         
+        <!-- Navigation -->
         <nav class="mt-8 px-4 space-y-2">
             <div class="text-indigo-200 text-xs uppercase tracking-wider font-semibold mb-4 px-3">NAVIGATION</div>
             
-            <a href="#" class="flex items-center px-4 py-3 bg-white/20 text-white rounded-xl shadow-lg">
+            <a href="#" class="flex items-center px-4 py-3 bg-white/20 text-white rounded-xl shadow-lg backdrop-blur-sm">
                 <i class="fas fa-calendar-alt w-5 h-5 mr-3"></i>
                 <span>Event Management</span>
             </a>
 
-            <a href="tabel_event.php" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover-lift">
+            <a href="#" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover:-translate-y-0.5">
                 <i class="fas fa-chart-pie w-5 h-5 mr-3 group-hover:scale-110 transition-transform"></i>
-                <span>Tabel event</span>
+                <span>Tabel Event</span>
             </a>
             
-            <a href="#" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover-lift">
+            <a href="#" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover:-translate-y-0.5">
                 <i class="fas fa-file-alt w-5 h-5 mr-3 group-hover:scale-110 transition-transform"></i>
                 <span>Reports</span>
             </a>
             
-            <a href="#" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover-lift">
+            <a href="#" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover:-translate-y-0.5">
                 <i class="fas fa-users w-5 h-5 mr-3 group-hover:scale-110 transition-transform"></i>
                 <span>Users</span>
             </a>
         </nav>
         
+        <!-- User Profile -->
         <div class="absolute bottom-4 left-4 right-4">
-            <div class="glass-effect rounded-xl p-4 text-center">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center border border-white/20">
                 <div class="w-12 h-12 bg-white rounded-full mx-auto mb-2 flex items-center justify-center">
-                    <i class="fas fa-user-shield text-primary"></i>
+                    <i class="fas fa-user-shield text-primary text-lg"></i>
                 </div>
                 <div class="text-white text-sm font-medium">Administrator</div>
                 <div class="text-indigo-200 text-xs">v2.0</div>
@@ -809,6 +837,45 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+
+<!-- tambahan untuk offcanvas pada mobile -->
+<script>
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        sidebarToggle.addEventListener('click', openSidebar);
+        sidebarClose.addEventListener('click', closeSidebar);
+        overlay.addEventListener('click', closeSidebar);
+
+        // Close sidebar when clicking on nav links (mobile)
+        const navLinks = sidebar.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+    </script>
 
 <!-- Tambahan CSS untuk styling -->
 <style>
