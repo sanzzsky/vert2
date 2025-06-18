@@ -338,12 +338,12 @@ $all_tickets = $conn->query("SELECT * FROM tickets ORDER BY event_date DESC")->f
         <nav class="mt-8 px-4 space-y-2">
             <div class="text-indigo-200 text-xs uppercase tracking-wider font-semibold mb-4 px-3">NAVIGATION</div>
             
-            <a href="#" class="flex items-center px-4 py-3 bg-white/20 text-white rounded-xl shadow-lg backdrop-blur-sm">
-                <i class="fas fa-calendar-alt w-5 h-5 mr-3"></i>
+            <a href="../php/admin.php" class="flex items-center px-4 py-3  text-white  backdrop-blur-sm hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover:-translate-y-0.5">
+                <i class="fas fa-calendar-alt w-5 h-5 mr-3 group-hover:scale-110 transition-transform"></i>
                 <span>Event Management</span>
             </a>
 
-            <a href="#" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover:-translate-y-0.5">
+            <a href="../php/tabel_event.php" class="flex items-center px-4 py-3 text-indigo-200 hover:bg-white/10 hover:text-white rounded-xl transition-all duration-200 group hover:-translate-y-0.5">
                 <i class="fas fa-chart-pie w-5 h-5 mr-3 group-hover:scale-110 transition-transform"></i>
                 <span>Tabel Event</span>
             </a>
