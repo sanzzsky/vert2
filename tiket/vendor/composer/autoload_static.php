@@ -7,9 +7,17 @@ namespace Composer\Autoload;
 class ComposerStaticInitdffaaf466360b507f90f25539a7b6769
 {
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'SnapBi\\' => 7,
+        ),
         'P' => 
         array (
             'PHPMailer\\PHPMailer\\' => 20,
+        ),
+        'M' => 
+        array (
+            'Midtrans\\' => 9,
         ),
         'E' => 
         array (
@@ -26,9 +34,17 @@ class ComposerStaticInitdffaaf466360b507f90f25539a7b6769
     );
 
     public static $prefixDirsPsr4 = array (
+        'SnapBi\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/midtrans/midtrans-php/SnapBi',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'Midtrans\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/midtrans/midtrans-php/Midtrans',
         ),
         'Endroid\\QrCode\\' => 
         array (

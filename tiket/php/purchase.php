@@ -138,7 +138,7 @@ function formatRupiah($number) {
     </div>
 
     <main class="container mx-auto px-6 py-8 flex-grow">
-    <form action="payment.php" method="POST" id="orderForm">
+    <form action="process_payment.php" method="POST" id="orderForm">
         
         <div class="mb-8">
             <div class="flex items-center justify-center space-x-4 md:space-x-8">
@@ -255,7 +255,7 @@ function formatRupiah($number) {
                     <div class="mt-8">
                         <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-[0.98] shadow-lg">
                             <div class="flex items-center justify-center space-x-3">
-                                <i class="fas fa-credit-card text-lg"></i><span class="text-lg">Lanjut ke Pembayaran</span>
+                                <i class="fas fa-credit-card text-lg"></i><span class="text-lg">Bayar</span>
                             </div>
                         </button>
                     </div>
