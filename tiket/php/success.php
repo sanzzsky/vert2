@@ -64,7 +64,7 @@ if (!$order) {
         }
     </script>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-indigo-50">
+<body class="min-h-screen bg-gradient-to-br from-indigo-200 via-violet-100 to-white">
     <!-- Animated Background Elements -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-10 left-10 w-32 h-32 bg-green-200 rounded-full opacity-20 animate-pulse-slow"></div>
@@ -143,9 +143,6 @@ if (!$order) {
                     <!-- Success Content -->
                     <div class="p-8">
                         <div class="text-center mb-8">
-                            <p class="text-gray-600 text-lg mb-4">
-                                Terima kasih atas kepercayaan Anda. E-tiket telah dikirimkan ke email Anda dan dapat digunakan untuk masuk ke acara.
-                            </p>
                             <div class="flex items-center justify-center text-sm text-gray-500">
                                 <i class="fas fa-clock mr-2"></i>
                                 <span>Diproses pada <?= date('d M Y, H:i') ?> WIB</span>
@@ -167,10 +164,6 @@ if (!$order) {
                                     <i class="fas fa-mobile-alt mt-1 mr-3 text-blue-500"></i>
                                     <span>Simpan e-tiket di smartphone Anda untuk memudahkan akses</span>
                                 </div>
-                                <div class="flex items-start">
-                                    <i class="fas fa-calendar-check mt-1 mr-3 text-blue-500"></i>
-                                    <span>Datang 30 menit sebelum acara dimulai</span>
-                                </div>
                             </div>
                         </div>
 
@@ -180,10 +173,6 @@ if (!$order) {
                                 <i class="fas fa-home mr-2"></i>
                                 Kembali ke Beranda
                             </a>
-                            <button onclick="window.print()" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-4 px-6 rounded-2xl shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
-                                <i class="fas fa-print mr-2"></i>
-                                Cetak Tiket
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -280,22 +269,6 @@ if (!$order) {
                     </div>
                 </div>
 
-                <!-- Support Contact -->
-                <div class="mt-6 bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl p-4 text-white">
-                    <div class="flex items-start">
-                        <i class="fas fa-headset text-white mt-1 mr-3"></i>
-                        <div>
-                            <h4 class="font-semibold mb-1">Butuh Bantuan?</h4>
-                            <p class="text-sm text-orange-100">Hubungi customer service kami jika ada pertanyaan tentang tiket Anda</p>
-                            <div class="mt-2">
-                                <a href="tel:+6281234567890" class="text-xs bg-white bg-opacity-20 px-3 py-1 rounded-full hover:bg-opacity-30 transition-all duration-200">
-                                    <i class="fas fa-phone mr-1"></i>
-                                    +62 812-3456-7890
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

@@ -92,43 +92,47 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <a href="index.php" class="text-orange-500 text-sm font-medium">Lihat Semua</a>
         </div>
         
-        <div class="flex flex-wrap justify-center gap-6 px-6 py-6">
-            <?php if (count($tickets) > 0): ?>
-                <?php foreach($tickets as $ticket): ?>
-                <?php
-                    $location = isset($ticket['location']) && !empty($ticket['location']) ? htmlspecialchars($ticket['location']) : 'Lokasi TBA';
-                    $event_time = isset($ticket['event_time']) && !empty($ticket['event_time']) ? date('H:i', strtotime($ticket['event_time'])) . ' WIB' : 'Waktu TBA';
-                ?>
-                <div class="w-64 bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
-                    <div class="h-40 w-full overflow-hidden">
-                        <img src="images/<?= htmlspecialchars($ticket['image']) ?>" alt="<?= htmlspecialchars($ticket['event_name']) ?>" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-grow p-4 flex flex-col justify-between">
-                        <div>
-                            <h4 class="font-bold text-base mb-2 leading-tight text-gray-900"><?= htmlspecialchars($ticket['event_name']) ?></h4>
-                            <div class="flex items-center text-sm text-gray-600 mb-1">
-                                <svg class="w-4 h-4 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                                <?= date('d F Y', strtotime($ticket['event_date'])) ?>
+        <div class="overflow-x-auto pb-4">
+            <div class="flex gap-4 w-max">
+                    <div class="flex flex-wrap justify-center gap-6 px-6 py-6">
+                    <?php if (count($tickets) > 0): ?>
+                        <?php foreach($tickets as $ticket): ?>
+                        <?php
+                            $location = isset($ticket['location']) && !empty($ticket['location']) ? htmlspecialchars($ticket['location']) : 'Lokasi TBA';
+                            $event_time = isset($ticket['event_time']) && !empty($ticket['event_time']) ? date('H:i', strtotime($ticket['event_time'])) . ' WIB' : 'Waktu TBA';
+                        ?>
+                        <div class="w-64 bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
+                            <div class="h-40 w-full overflow-hidden">
+                                <img src="images/<?= htmlspecialchars($ticket['image']) ?>" alt="<?= htmlspecialchars($ticket['event_name']) ?>" class="w-full h-full object-cover">
                             </div>
-                            <div class="flex items-center text-sm text-gray-600 mb-1">
-                                <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <?= $event_time ?>
-                            </div>
-                            <div class="flex items-center text-sm text-gray-600 mb-3">
-                                <svg class="w-4 h-4 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
-                                <?= $location ?>
+                            <div class="flex-grow p-4 flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-bold text-base mb-2 leading-tight text-gray-900"><?= htmlspecialchars($ticket['event_name']) ?></h4>
+                                    <div class="flex items-center text-sm text-gray-600 mb-1">
+                                        <svg class="w-4 h-4 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                        <?= date('d F Y', strtotime($ticket['event_date'])) ?>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-600 mb-1">
+                                        <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        <?= $event_time ?>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-600 mb-3">
+                                        <svg class="w-4 h-4 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                                        <?= $location ?>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end items-center mt-3">
+                                    <a href="php/detail_event.php?id=<?= $ticket['id'] ?>" class="bg-violet-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-violet-700 transition-colors duration-200 shadow-sm">View Details</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="flex justify-end items-center mt-3">
-                            <a href="php/detail_event.php?id=<?= $ticket['id'] ?>" class="bg-violet-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-violet-700 transition-colors duration-200 shadow-sm">View Details</a>
-                        </div>
-                    </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-gray-600">Tidak ada event yang ditemukan.</p>
+                    <?php endif; ?>
                 </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p class="text-gray-600">Tidak ada event yang ditemukan.</p>
-            <?php endif; ?>
-        </div>
+            </div>
+        
     </main>
     
     <footer class="bg-violet-900 text-gray-200 py-8 mt-16">
