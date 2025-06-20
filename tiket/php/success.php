@@ -25,28 +25,324 @@ if (!$order) {
     <title>Pembayaran Berhasil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        scaleIn: {
+                            '0%': { transform: 'scale(0.8)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto max-w-lg text-center py-24 px-4">
-        <div class="bg-white rounded-2xl shadow-xl p-8">
-            <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-check-circle text-6xl text-green-500"></i>
-            </div>
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">Pembayaran Berhasil!</h1>
-            <p class="text-gray-600 mb-6">Terima kasih, pesanan Anda telah kami terima. E-tiket telah dikirimkan ke email Anda.</p>
-            
-            <div class="text-left bg-gray-50 border rounded-lg p-4">
-                <p class="font-semibold mb-2">Detail Pesanan:</p>
-                <p><strong>Order ID:</strong> <?= htmlspecialchars($order['order_id']) ?></p>
-                <p><strong>Nama:</strong> <?= htmlspecialchars($order['buyer_name']) ?></p>
-                <p><strong>Acara:</strong> <?= htmlspecialchars($order['event_name']) ?></p>
-                <p><strong>Jumlah Tiket:</strong> <?= htmlspecialchars($order['quantity']) ?></p>
-            </div>
+<body class="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-indigo-50">
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-10 left-10 w-32 h-32 bg-green-200 rounded-full opacity-20 animate-pulse-slow"></div>
+        <div class="absolute top-1/3 right-20 w-24 h-24 bg-blue-200 rounded-full opacity-30 animate-bounce-slow"></div>
+        <div class="absolute bottom-20 left-1/4 w-20 h-20 bg-indigo-200 rounded-full opacity-25 animate-pulse-slow"></div>
+        <div class="absolute bottom-1/3 right-1/3 w-16 h-16 bg-green-300 rounded-full opacity-20 animate-bounce-slow"></div>
+    </div>
 
-            <a href="../index.php" class="mt-8 inline-block w-full bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg">
-                Kembali ke Beranda
-            </a>
+    <!-- Navigation Steps -->
+    <div class="container mx-auto max-w-4xl px-4 pt-8 relative z-10">
+        <div class="flex items-center justify-center mb-8">
+            <!-- Desktop Version -->
+            <div class="hidden md:flex items-center space-x-4">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <span class="ml-2 text-sm text-gray-600">Informasi Pembeli</span>
+                </div>
+                <div class="w-12 h-0.5 bg-green-400"></div>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <span class="ml-2 text-sm text-gray-600">Metode Pembayaran</span>
+                </div>
+                <div class="w-12 h-0.5 bg-green-400"></div>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <span class="ml-2 text-sm text-green-600 font-medium">Konfirmasi</span>
+                </div>
+            </div>
+            
+            <!-- Mobile Version -->
+            <div class="flex md:hidden items-center justify-between w-full max-w-xs">
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mb-2">
+                        <i class="fas fa-check text-white text-xs"></i>
+                    </div>
+                    <span class="text-xs text-gray-600 text-center">Info</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-green-400 mx-2"></div>
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mb-2">
+                        <i class="fas fa-check text-white text-xs"></i>
+                    </div>
+                    <span class="text-xs text-gray-600 text-center">Bayar</span>
+                </div>
+                <div class="flex-1 h-0.5 bg-green-400 mx-2"></div>
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mb-2">
+                        <i class="fas fa-check text-white text-xs"></i>
+                    </div>
+                    <span class="text-xs text-green-600 font-medium text-center">Selesai</span>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="container mx-auto max-w-4xl px-4 pb-16 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Success Message Section -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden animate-slide-up">
+                    <!-- Success Header -->
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-8 text-white text-center">
+                        <div class="w-24 h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4 animate-scale-in">
+                            <i class="fas fa-check-circle text-5xl text-white animate-bounce-slow"></i>
+                        </div>
+                        <h1 class="text-3xl font-bold mb-2">Pembayaran Berhasil!</h1>
+                        <p class="text-green-100 opacity-90">Selamat! Transaksi Anda telah berhasil diproses</p>
+                    </div>
+
+                    <!-- Success Content -->
+                    <div class="p-8">
+                        <div class="text-center mb-8">
+                            <p class="text-gray-600 text-lg mb-4">
+                                Terima kasih atas kepercayaan Anda. E-tiket telah dikirimkan ke email Anda dan dapat digunakan untuk masuk ke acara.
+                            </p>
+                            <div class="flex items-center justify-center text-sm text-gray-500">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>Diproses pada <?= date('d M Y, H:i') ?> WIB</span>
+                            </div>
+                        </div>
+
+                        <!-- Next Steps -->
+                        <div class="bg-blue-50 rounded-2xl p-6 mb-8">
+                            <h3 class="font-semibold text-blue-800 mb-4 flex items-center">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                Langkah Selanjutnya
+                            </h3>
+                            <div class="space-y-3 text-sm text-blue-700">
+                                <div class="flex items-start">
+                                    <i class="fas fa-envelope mt-1 mr-3 text-blue-500"></i>
+                                    <span>Cek email Anda untuk mendapatkan e-tiket dan detail acara</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-mobile-alt mt-1 mr-3 text-blue-500"></i>
+                                    <span>Simpan e-tiket di smartphone Anda untuk memudahkan akses</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <i class="fas fa-calendar-check mt-1 mr-3 text-blue-500"></i>
+                                    <span>Datang 30 menit sebelum acara dimulai</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="../index.php" class="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-6 rounded-2xl shadow-xl transition-all duration-300 transform hover:scale-[1.02] text-center">
+                                <i class="fas fa-home mr-2"></i>
+                                Kembali ke Beranda
+                            </a>
+                            <button onclick="window.print()" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-4 px-6 rounded-2xl shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+                                <i class="fas fa-print mr-2"></i>
+                                Cetak Tiket
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary Section -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden sticky top-8 animate-fade-in">
+                    <div class="bg-gradient-to-r from-gray-800 to-gray-900 p-6 text-white">
+                        <h2 class="text-xl font-bold flex items-center">
+                            <i class="fas fa-receipt mr-2"></i>
+                            Detail Pesanan
+                        </h2>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="space-y-6">
+                            <!-- Order ID -->
+                            <div class="bg-green-50 rounded-xl p-4 border-2 border-green-200">
+                                <div class="text-center">
+                                    <div class="text-sm text-gray-600 mb-1">Order ID</div>
+                                    <div class="text-lg font-bold text-green-600 font-mono tracking-wider">
+                                        <?= htmlspecialchars($order['order_id']) ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event Details -->
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-calendar-alt mr-2 text-blue-500"></i>
+                                    Detail Acara
+                                </h3>
+                                <div class="space-y-3 text-sm">
+                                    <div>
+                                        <div class="text-gray-600">Nama Acara</div>
+                                        <div class="font-medium text-gray-800"><?= htmlspecialchars($order['event_name']) ?></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-gray-600">Tanggal</div>
+                                        <div class="font-medium text-gray-800"><?= date('d M Y', strtotime($order['event_date'])) ?></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-gray-600">Tipe Tiket</div>
+                                        <div class="font-medium text-gray-800"><?= htmlspecialchars($order['ticket_type_name']) ?></div>
+                                    </div>
+                                    <div>
+                                        <div class="text-gray-600">Jumlah Tiket</div>
+                                        <div class="font-medium text-gray-800"><?= htmlspecialchars($order['quantity']) ?> tiket</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Buyer Details -->
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-user mr-2 text-green-500"></i>
+                                    Detail Pembeli
+                                </h3>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-user w-4 text-gray-400 mr-2"></i>
+                                        <span class="text-gray-800"><?= htmlspecialchars($order['buyer_name']) ?></span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-envelope w-4 text-gray-400 mr-2"></i>
+                                        <span class="text-gray-800 truncate"><?= htmlspecialchars($order['buyer_email']) ?></span>
+                                    </div>
+                                    <?php if (!empty($order['buyer_phone'])): ?>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-phone w-4 text-gray-400 mr-2"></i>
+                                        <span class="text-gray-800"><?= htmlspecialchars($order['buyer_phone']) ?></span>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <!-- Payment Info -->
+                            <div class="bg-blue-50 rounded-xl p-4 border-2 border-blue-200">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-700 font-medium">Total Dibayar</span>
+                                    <div class="text-right">
+                                        <div class="text-2xl font-bold text-blue-600">
+                                            Rp <?= number_format($order['total_price'], 0, ',', '.') ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-xs text-gray-500 flex items-center justify-between">
+                                    <span>Metode: <?= htmlspecialchars($order['payment_method']) ?></span>
+                                    <span class="text-green-600 font-medium">✓ LUNAS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Support Contact -->
+                <div class="mt-6 bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl p-4 text-white">
+                    <div class="flex items-start">
+                        <i class="fas fa-headset text-white mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-semibold mb-1">Butuh Bantuan?</h4>
+                            <p class="text-sm text-orange-100">Hubungi customer service kami jika ada pertanyaan tentang tiket Anda</p>
+                            <div class="mt-2">
+                                <a href="tel:+6281234567890" class="text-xs bg-white bg-opacity-20 px-3 py-1 rounded-full hover:bg-opacity-30 transition-all duration-200">
+                                    <i class="fas fa-phone mr-1"></i>
+                                    +62 812-3456-7890
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add celebration animation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create confetti effect
+            function createConfetti() {
+                const colors = ['#10B981', '#3B82F6', '#8B5CF6', '#F59E0B', '#EF4444'];
+                const confettiCount = 50;
+                
+                for (let i = 0; i < confettiCount; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-10px';
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.zIndex = '9999';
+                    confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }
+            }
+            
+            // Add CSS for falling animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    to {
+                        transform: translateY(100vh) rotate(360deg);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Trigger confetti after a short delay
+            setTimeout(createConfetti, 500);
+        });
+    </script>
 </body>
 </html>

@@ -43,27 +43,6 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h1 class="text-2xl font-bold text-black">TIKETFEST.ID</h1>
             <p class="text-sm text-black">Temukan Event menarik</p>
         </div>
-        <nav class="flex items-center gap-6">
-            <?php if (isset($_SESSION['username'])): ?>
-                <div class="profile-dropdown relative">
-                    <img 
-                        src="images/images.jpg" 
-                        alt="Profile" 
-                        class="w-8 h-8 rounded-full cursor-pointer object-cover"
-                    >
-                    <div class="dropdown-content">
-                        <span class="block px-4 py-2 text-sm text-gray-700">Hello, <?= htmlspecialchars($_SESSION['username']) ?>!</span>
-                        <a href="php/logout.php" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
-                    </div>
-                </div>
-            <?php else: ?>
-                <a href="login.php" title="Login" class="text-gray-600 hover:text-violet-700">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </a>
-            <?php endif; ?>
-        </nav>
     </header>
 
     <div class="flex justify-center px-4 mb-6 pt-5">
@@ -152,9 +131,29 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </main>
     
-    <footer class="bg-violet-900 text-gray-200 py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; <?= date("Y") ?> TIKETFEST.ID. All rights reserved.</p>
+    <footer class="bg-violet-900 text-gray-200 py-8 mt-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">TICKETFEST.ID</h3>
+                    <p class="text-gray-400">Platform tiket online terpercaya untuk berbagai event menarik.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Bantuan</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition">Hubungi Kami</a></li>
+                        <li><a href="#" class="hover:text-white transition">Kebijakan Refund</a></li>
+                        <li><a href="login.php" class="text-gray-400"> Admin </a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Keamanan</h4>
+                    <div class="flex items-center space-x-2 text-green-400"><i class="fas fa-shield-alt"></i><span class="text-sm">SSL Encrypted</span></div>
+                </div>
+            </div>
+            <div class="border-t border-violet-800 mt-8 pt-8 text-center text-gray-400"><p>&copy; <?php echo date("Y"); ?> TICKETFEST.ID . All rights reserved.</p>
+        </div>
         </div>
     </footer>
     
