@@ -57,7 +57,8 @@ try {
     ]);
 
     // Tampilkan halaman pembayaran dengan auto-trigger
-    echo '<!DOCTYPE html>
+    echo 
+'<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -275,4 +276,3 @@ try {
     die('Error saat berkomunikasi dengan Midtrans: ' . $e->getMessage());
 }
 
-?>

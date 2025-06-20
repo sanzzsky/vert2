@@ -96,14 +96,13 @@ try {
     <script src="https://cdn.tailwindcss.com"></script>
     <meta http-equiv="refresh" content="2;url=../php/success.php?order_id=<?php echo htmlspecialchars($order_id); ?>">
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="text-center">
+<body class="bg-gradient-to-br from-blue-100 via-white to-green-100 flex items-center justify-center min-h-screen px-4">
+    <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl w-full max-w-md text-center">
         <img src="../assets/loading.gif" alt="Loading..." class="mx-auto h-24 w-24">
-        <h1 class="text-2xl font-bold text-gray-700 mt-4">Pesanan Anda Sedang Diproses</h1>
-        <p class="text-gray-500">Mengirim e-tiket ke email Anda, mohon tunggu...</p>
-        <p class="text-sm text-gray-400 mt-8">Anda akan dialihkan secara otomatis.</p>
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-700 mt-6">Tiket Mu Sedang Diproses Sabarya...</h1>
     </div>
 </body>
+
 </html>
 <?php
 // Memastikan output HTML terkirim ke browser sebelum melanjutkan proses lambat
