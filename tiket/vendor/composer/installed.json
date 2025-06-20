@@ -212,7 +212,7 @@
             },
             "time": "2025-03-18T06:30:17+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "SnapBi\\": "SnapBi/",
