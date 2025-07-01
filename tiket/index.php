@@ -58,6 +58,32 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </form>
     </div>
 
+    <!-- Slideshow Promo -->
+    <div class="w-full flex justify-center mb-8">
+      <div class="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-lg">
+        <div id="promo-slides" class="relative w-full h-56">
+          <?php
+            $promoImages = [
+              'images/OIP.webp',
+              'images/artfest.webp',
+              'images/music.avif',
+              'images/foodfest.jpg',
+            ];
+            foreach ($promoImages as $idx => $img):
+          ?>
+            <img src="<?= $img ?>" class="promo-slide absolute inset-0 w-full h-full object-cover transition-opacity duration-700 <?= $idx === 0 ? '' : 'opacity-0 pointer-events-none' ?>" alt="Promo <?= $idx+1 ?>">
+          <?php endforeach; ?>
+        </div>
+        <button id="promo-prev" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg></button>
+        <button id="promo-next" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 rounded-full p-2 shadow hover:bg-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg></button>
+        <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
+          <?php foreach ($promoImages as $idx => $img): ?>
+            <span class="promo-dot w-2 h-2 rounded-full bg-white border border-violet-500 <?= $idx === 0 ? 'bg-violet-500' : '' ?>"></span>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
+
     <div class="flex justify-center gap-4 mb-10">
         <?php
           // Array diubah menjadi lebih terstruktur untuk menyimpan nama & gambar
@@ -162,5 +188,40 @@ $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </footer>
     
     <script src="js/script.js"></script>
+    <script>
+    // Promo Slideshow
+    const promoSlides = document.querySelectorAll('.promo-slide');
+    const promoDots = document.querySelectorAll('.promo-dot');
+    let promoIdx = 0;
+    function showPromo(idx) {
+      promoSlides.forEach((el, i) => {
+        el.classList.toggle('opacity-0', i !== idx);
+        el.classList.toggle('pointer-events-none', i !== idx);
+        promoDots[i].classList.toggle('bg-violet-500', i === idx);
+        promoDots[i].classList.toggle('bg-white', i !== idx);
+      });
+    }
+    document.getElementById('promo-prev').onclick = () => { promoIdx = (promoIdx-1+promoSlides.length)%promoSlides.length; showPromo(promoIdx); };
+    document.getElementById('promo-next').onclick = () => { promoIdx = (promoIdx+1)%promoSlides.length; showPromo(promoIdx); };
+    setInterval(() => { promoIdx = (promoIdx+1)%promoSlides.length; showPromo(promoIdx); }, 4000);
+
+    // Today Event Slideshow
+    const todaySlides = document.querySelectorAll('.today-slide');
+    const todayDots = document.querySelectorAll('.today-dot');
+    let todayIdx = 0;
+    function showToday(idx) {
+      todaySlides.forEach((el, i) => {
+        el.classList.toggle('opacity-0', i !== idx);
+        el.classList.toggle('pointer-events-none', i !== idx);
+        todayDots[i].classList.toggle('bg-violet-500', i === idx);
+        todayDots[i].classList.toggle('bg-violet-200', i !== idx);
+      });
+    }
+    if (todaySlides.length > 0) {
+      document.getElementById('today-prev').onclick = () => { todayIdx = (todayIdx-1+todaySlides.length)%todaySlides.length; showToday(todayIdx); };
+      document.getElementById('today-next').onclick = () => { todayIdx = (todayIdx+1)%todaySlides.length; showToday(todayIdx); };
+      setInterval(() => { todayIdx = (todayIdx+1)%todaySlides.length; showToday(todayIdx); }, 5000);
+    }
+    </script>
 </body>
 </html>
